@@ -2,10 +2,17 @@ const mongoose = require('mongoose')
 
 const User = mongoose.model('Users', {
     name:String,
-    cpf: Number,
-    date: Date,
-    salary:Number,
-    email:String,
+    age: Number,
+    gender: String,
+    email: String,
+    cpe: String,
+    address: String,
+    number: Number,
+    district: String,
+    city: String,
+    state: String,
+    complement: String,
 })
 
 module.exports = User
+

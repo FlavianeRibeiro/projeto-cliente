@@ -23,9 +23,10 @@ exports.getId = async (req, res) =>{
 }
 
 exports.creat = async (req, res) =>{
-    const {name, cpf, date, salary, email} = req.body;
-    const user = { name, cpf, date, salary, email };
-    
+    const {name, age,  gender, email, cpe, address, number, district, city, state, complement} = req.body;
+    const user = { name, age,  gender, email, cpe, address, number, district, city, state, complement };
+    if(!user.name)
+        res.status(422).json({message: 'Falta inserir o nome'})
     try{
         await User.create(user);
         res.status(201).json({ message: 'Dado inserido' })
@@ -49,11 +50,14 @@ exports.delete = async (req, res) =>{
 
 exports.update = async (req, res)=>{
     const id = req.params.id;
-    const {name, cpf, date, salary, email} = req.body;
-    const user = { name, cpf, date, salary, email };
+    const {name, age,  gender, email, cpe, address, number, district, city, state, complement} = req.body;
+    const user = { name, age,  gender, email, cpe, address, number, district, city, state, complement };
+    console.log(user)
     
     try{
         var updateCliente = await User.updateOne({_id: id}, user);
+    console.log(updateCliente)
+
         if(updateCliente.matchedCount === 0)
             res.status(422).json({message: 'O usuário não encontrado'})
         res.status(201).json(user)
