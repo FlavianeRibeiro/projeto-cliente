@@ -1,5 +1,5 @@
 const api = {
-    baseURL: 'https://crudclient-serve.herokuapp.com'
+    baseURL: 'http://localhost:3000'
 }
 
 export default api;
