@@ -1,5 +1,6 @@
 <template lang="">
-    <div class="">
+    <div class="container text-center mt-5">
+        <h1>Página não encontrada</h1>
     </div>
 </template>
 <script>

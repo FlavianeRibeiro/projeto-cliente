@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import CreateClient from '../views/CreateClient.vue'
 import EditClient from '../views/EditClient.vue'
 import ListClient  from '../views/ListClient.vue'
@@ -10,7 +9,7 @@ const routes = [
     path: '/',
     name: 'home',
     redirect: '/lits',
-    component: HomeView
+    component: ListClient
   },
   {
     path: '/lits',

@@ -23,8 +23,8 @@
                             <ul class="">
                                 <li class="list-group-item"> <span class="fw-bold">Nome: </span>{{client.name}}</li>
                                 <li class="list-group-item"> <span class="fw-bold">E-mail: </span>{{client.email}}</li>
-                                <li class="list-group-item"> <span class="fw-bold" v-if="client.age">Idade:</span>{{client.age}} anos</li>
-                                <li class="list-group-item"> <span class="adress" v-if="client.state">{{client.state}} | {{client.city}}</span></li>
+                                <li class="list-group-item"> <span class="fw-bold" v-if="client.age">Idade: </span>{{client.age}} anos</li>
+                                <li class="list-group-item text-center"> <span class="adress" v-if="client.state">{{client.state}} | {{client.city}}</span></li>
                             </ul>
                             <div class="btns d-flex flex-row justify-content-center align-itens-center">
                                 <router-link :to="`/view/${client._id}`" class="btn btn-info my-1">
@@ -46,7 +46,7 @@
 </template>
 <script>
 import axios from "axios";
-import moment from 'moment'
+import api from "../service/api"
 
 export default {
     data(){
@@ -55,29 +55,24 @@ export default {
             clients: [],
             successMsg:'',
             errorMsg: '',
-            baseUrl: `http://localhost:3000`,
         }
     },
     methods: {
         getAllClient(){
-            axios.get(`${this.baseUrl}/client`)
+            axios.get(`${api.baseURL}/client`)
             .then((res) => {
                 this.clients = res.data;
             }).catch(err => console.log(err))
         },
         deleteClient(id){
             console.log(id)
-            axios.delete(`${this.baseUrl}/client/${id}`)
+            axios.delete(`${api.baseURL}/client/${id}`)
             .then((res) =>{
                 this.successMsg = res.data.message;
                 console.log(res, this.clients.indexOf(id))
                 this.getAllClient();
             }).catch(err => console.log(err))  
         },
-        getHumanDate : function (date) {
-            if(date == null || date == undefined) return null
-            return moment(date).format('DD/MM/YYYY');
-        }
     },
     created() {
       this.getAllClient();
@@ -96,7 +91,7 @@ export default {
         color:white;
         padding: 8px;
         border-radius: 25px;
-        font-size: 12px;
+        font-size: 14px;
     }
     
 </style>

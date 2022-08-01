@@ -26,7 +26,7 @@
                             <input type="number" required v-model="client.age" class="form-control" id="age" >
                         </div>
                         <div class="form-group col">
-                            <label for="gender">Sexo: </label>
+                            <label for="gender">Sexo </label>
                             <select class="form-control" id="gender" required>
                                 <option value="Feminino">Feminino</option>
                                 <option value="Masculino">Masculino</option>
@@ -78,7 +78,7 @@
 <script>
 
 import axios from "axios";
-import moment from 'moment'
+import api from "../service/api"
 
 export default {
     data(){
@@ -99,26 +99,20 @@ export default {
             },  
             sucessMsg:'',
             errorMsg: '',
-            baseUrl: `http://localhost:3000`,
         }
     },
     methods: {
         getIdClient(){
-            axios.get(`${this.baseUrl}/client/${this.clientId}`)
+            axios.get(`${api.baseURL}/client/${this.clientId}`)
             .then((res) => {
                 this.client = res.data;
-                this.client.date = this.getDate(this.client.date)
             }).catch(err => console.log(err))
         },
         updateClient(){
-            axios.patch(`${this.baseUrl}/client/${this.clientId}`, this.client)
+            axios.patch(`${api.baseURL}/client/${this.clientId}`, this.client)
             .then((res) =>{
-                console.log(res);
-            })
-        },
-        getDate(date) {
-            if(date == null || date == undefined) return null
-            return moment(date).format('YYYY-MM-DD');
+                this.sucessMsg = res.data;
+            }).catch(err => console.log(err))
         }
     },
     created() {

@@ -21,11 +21,11 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label for="name">Nome </label>
-                            <input type="text" required v-model="client.name" class="form-control" id="name" placeholder="Nome Completo">
+                            <input type="text" required v-model="client.name" class="form-control" id="name">
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="email">Email</label>
-                            <input type="email" required v-model="client.email" class="form-control" id="email" placeholder="Email">
+                            <input type="email" required v-model="client.email" class="form-control" id="email">
                         </div>
                         <div class="form-group col-sm-2">
                             <label for="age">Idade </label>
@@ -42,12 +42,12 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-2">
-                            <label for="cpe">CPE </label>
+                            <label for="cpe">CEP </label>
                             <input type="text" required v-model="client.cpe" class="form-control" id="cpe">
                         </div>
                         <div class="form-group col-sm-5">
                             <label for="address">Endereço</label>
-                            <input type="text" required v-model="client.address" class="form-control" id="address" placeholder="Email">
+                            <input type="text" required v-model="client.address" class="form-control" id="address" >
                         </div>
                         <div class="form-group col-sm-5">
                             <label for="city">Cidade </label>
@@ -84,6 +84,7 @@
 </template>
 <script>
 import axios from "axios";
+import api from "../service/api";
 export default {
     name: 'CreatClient',
     data(){
@@ -104,33 +105,19 @@ export default {
             imageSrc: '',
             successMsg:'',
             errorMsg: '',
-            baseUrl: `http://localhost:3000`,
         }
     },
     methods: {
         submit(){
             console.log(this.client);
             this.client.img = this.imageSrc;
-            axios.post(`${this.baseUrl}/client`, this.client)
+            axios.post(`${api.baseURL}/client`, this.client)
             .then((res) =>{
                 console.log(res);
                 this.successMsg = res.data.message;
             })
-        },
-        uploadImage() {    
-            var file = document
-                .querySelector('input[type=file]')
-                .files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                this.imageSrc = e.target.result             
-            };
-            reader.onerror = function(error) {
-                alert(error);
-            };
-            reader.readAsDataURL(file);      
         }
-    },
+    }
 }
 </script>
 <style >
